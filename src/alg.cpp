@@ -83,7 +83,7 @@ std::string infx2pstfx(std::string inf) {
         return st;
 }
 
-int eval(std::string st); {
+int eval(std::string st) {
     TStack<int, 100> stack2;
     std::string z;
     int x = 0;
@@ -102,5 +102,4 @@ int eval(std::string st); {
     z = stack2.get();
     return z;
     return 0;
-}
 }
