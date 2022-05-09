@@ -25,15 +25,15 @@ int pri(char p) {
 }
 int call(char k, int x, int y) {
     switch (k) {
-    case '+': 
+    case '+':
         return (x + y);
-    case '-': 
+    case '-':
         return (y - x);
-    case '*': 
+    case '*':
         return (x * y);
-    case '/': 
+    case '/':
         return (y / x);
-    default: 
+    default:
         return 0;
     }
 }
@@ -45,26 +45,21 @@ std::string infx2pstfx(std::string inf) {
         if (pri(inf[i]) == 5) {
             st.push_back(inf[i]);
             st.push_back(pu);
-        }
-        else {
+        } else {
             if (pri(inf[i]) == 0) {
                 stack1.push(inf[i]);
-            }
-            else if (stack1.isEmpty()) {
+            } else if (stack1.isEmpty()) {
                 stack1.push(inf[i]);
-            }
-            else if ((pri(inf[i]) > pri(stack1.get()))) {
+            } else if ((pri(inf[i]) > pri(stack1.get()))) {
                 stack1.push(inf[i]);
-            }
-            else if (pri(inf[i]) == 1) {
+            } else if (pri(inf[i]) == 1) {
                 while (pri((stack1.get()) != 0)) {
                     st.push_back(stack1.get());
                     st.push_back(pu);
                     stack1.pop();
                 }
                 stack1.pop();
-            }
-            else {
+            } else {
                 char a = pri(inf[i]);
                 char b = pri(stack1.get());
                 while ((a <= b) && (!stack1.isEmpty())) {
@@ -87,21 +82,20 @@ std::string infx2pstfx(std::string inf) {
         return st;
 }
 
-int eval(std::string pref); {
+int eval(std::string st); {
     TStack<int, 100> stack2;
-    int z = 0;
+    std::string z;
     int x = 0;
     int y = 0;
-    for (int i = 0; i < pref.size(); i++) {
-        if (pri(pref[i]) == 5) {
-            stack2.push(pref[i] - '0');
-        }
-        else if (pri(pref[i]) < 5) {
+    for (int i = 0; i < st.size(); i++) {
+        if (pri(st[i]) == 5) {
+            stack2.push(st[i] - '0');
+        } else if (pri(st[i]) < 5) {
             x = stack2.get();
             stack2.pop();
             y = stack2.get();
             stack2.pop();
-            stack2.push(call(pref[i], x, y));
+            stack2.push(call(st[i], x, y));
         }
     }
     z = stack2.get();
