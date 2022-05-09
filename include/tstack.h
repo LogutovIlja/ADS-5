@@ -4,10 +4,10 @@
 
 template<typename T, int size>
 class TStack {
-private:
-        T arr[size];
+ private:
+        T arr[100];
         int top;
-public:
+ public:
     TStack() : top(-1) { }
     T get() const {
         return arr[top];
@@ -26,6 +26,5 @@ public:
         if (top < size - 1)
             arr[++top] = item;
     }
-
 };
 #endif  // INCLUDE_TSTACK_H_
