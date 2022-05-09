@@ -1,6 +1,7 @@
 // Copyright 2021 NNTU-CS
 #include <string>
 #include <map>
+#include <iostream>
 #include "tstack.h"
 
 int pri(char p) {
@@ -23,16 +24,38 @@ int pri(char p) {
         return 5;
     }
 }
+int prir(char pr) {
+    switch (pr) {
+    case '(':
+      return 0;
+    case ')':
+      return 1;
+    case '+':
+      return 2;
+    case '-':
+      return 2;
+    case '*':
+      return 3;
+    case '/':
+      return 3;
+    default:
+        return -1;
+    }
+}
 int call(char k, int x, int y) {
     switch (k) {
     case '+':
         return (x + y);
+            break;
     case '-':
-        return (y - x);
+        return (x - y);
+            break;
     case '*':
         return (x * y);
+            break;
     case '/':
-        return (y / x);
+        return (x / y);
+            break;
     default:
         return 0;
     }
@@ -83,23 +106,22 @@ std::string infx2pstfx(std::string inf) {
         return st;
 }
 
-int eval(std::string st) {
+int eval(std::string pst) {
     TStack<int, 100> stack2;
     int z = 0;
     int x = 0;
     int y = 0;
-    for (int i = 0; i < st.size(); i++) {
-        if (pri(st[i]) == 5) {
-            stack2.push(st[i] - '0');
-        } else if (pri(st[i]) < 5) {
-            x = stack2.get();
-            stack2.pop();
+for (int i = 0; i < pst.length(); i++) {
+        if ((prir(pst[i]) == -1) && pst[i] != ' ') {
+            stack2.push(pst[i] - '0');
+        } else if (prir(pst[i]) > 1) {
             y = stack2.get();
             stack2.pop();
-            stack2.push(call(st[i], x, y));
+            x = stack2.get();
+            stack2.pop();
+            stack2.push(Calc(post[i], x, y));
         }
     }
     z = stack2.get();
-    return z;
-    return 0;
+  return z;
 }
