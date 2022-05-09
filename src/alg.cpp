@@ -19,9 +19,9 @@ int pri(char p) {
     case '/':
         return 3;
     case ' ':
-        return 5;
-    default:
         return 4;
+    default:
+        return 5;
     }
 }
 int prir(char pr) {
@@ -65,7 +65,7 @@ std::string infx2pstfx(std::string inf) {
     char pu = ' ';
     TStack<char, 100> stack1;
     for (int i = 0; i < inf.size(); i++) {
-        if (pri(inf[i]) == 4) {
+        if (pri(inf[i]) == 5) {
             st.push_back(inf[i]);
             st.push_back(pu);
         } else {
