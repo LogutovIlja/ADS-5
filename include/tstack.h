@@ -9,8 +9,11 @@ class TStack {
         int top;
  public:
     TStack() : top(-1) { }
-    T get() const {
-        return arr[top];
+    T get() {
+    if (!isEmpty())
+      return arr[top];
+    else
+    throw "Empty!";
     }
     bool isEmpty() const {
         return top == -1;
@@ -19,12 +22,14 @@ class TStack {
         return top == size - 1;
     }
     void pop() {
-        if (top >= 0)
-            top--;
+      if (!isEmpty())
+      top--;
     }
-    void push(T item) {
-        if (top < size - 1)
-            arr[++top] = item;
-    }
+    void push(T value) {
+      if (isFull())
+        throw "Full!";
+      else
+        arr[++top] = value;
+     }
 };
 #endif  // INCLUDE_TSTACK_H_
