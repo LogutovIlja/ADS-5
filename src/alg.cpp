@@ -41,51 +41,44 @@ int call(char k, int x, int y) {
         return 0;
     }
 }
-
 std::string infx2pstfx(std::string inf) {
-    std::string st = "";
-    TStack<char, 100> stack1;
-
-    for (int i = 0; i < inf.length(); i++) {
-        if ((inf[i] >= '0') && (inf[i] <= '9')) {
-            if (st != "") {
-                if (!((inf[i - 1] >= '0') && (inf[i - 1] <= '9'))) {
-                    st += ' ';
-                }
-            }
-        st += inf[i];
-        } else {
-            int gg = prir(inf[i]);
-            if (((gg == 0) || (stack1.isEmpty()) || (gg >
-prir(stack1.get()))) && (gg != 1)) {
-                stack1.push(inf[i]);
-            } else {
-                if (gg != 1) {
-                    while ((prir(stack1.get()) >= gg) &&
-!(stack1.isEmpty())) {
-                        st += ' ';
-                        st += stack1.get();
-                        stack1.pop();
-                    }
-                    stack1.push(inf[i]);
-
-                } else {
-                    while (prir(stack1.get())) {
-                        st += ' ';
-                        st += stack1.get();
-                        stack1.pop();
-                    }
-                    stack1.pop();
-                }
-            }
+  TStack <char, 100> stack1;
+  std::string st;
+  for (size_t i = 0; i < inf.size(); i++) {
+    if ((prir(inf[i]) == -1) && (prir(inf[i]) != 1)) {
+      if (!st.empty() && prir(inf[i - 1]) != -1) {
+        st.push_back(' ');
+      }
+      st.push_back(inf[i]);
+    } else if ((prir(inf[i]) > prir(stack1.get()))
+               || (stack1.isEmpty()) || (prir(inf[i]) == 0)) {
+      stack1.push(inf[i]);
+    } else {
+      if (prir(inf[i]) == 1) {
+        while (prir(stack1.get()) != 0) {
+          st.push_back(' ');
+          st.push_back(stack1.get());
+          stack1.pop();
         }
-    }
-    while (!(stack1.isEmpty())) {
-        st += ' ';
-        st += stack1.get();
         stack1.pop();
+      } else {
+        while (prir(stack1.get()) >= prir(inf[i])) {
+          st.push_back(' ');
+          st.push_back(stack1.get());
+          stack1.pop();
+        }
+        stack1.push(inf[i]);
+      }
     }
-    return st;
+  }
+  while (!stack1.isEmpty()) {
+    st.push_back(' ');
+    if (prir(stack1.get()) != 0) {
+      st.push_back(stack1.get());
+    }
+    stack1.pop();
+  }
+  return st;
 }
 
 int eval(std::string pst) {
