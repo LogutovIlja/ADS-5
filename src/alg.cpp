@@ -85,7 +85,7 @@ std::string infx2pstfx(std::string inf) {
 
 int eval(std::string st) {
     TStack<int, 100> stack2;
-    std::string z;
+    int z = 0;
     int x = 0;
     int y = 0;
     for (int i = 0; i < st.size(); i++) {
