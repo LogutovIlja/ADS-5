@@ -45,16 +45,16 @@ int prir(char pr) {
 int call(char k, int x, int y) {
     switch (k) {
     case '+':
-        return (x + y);
+        return x + y;
             break;
     case '-':
-        return (x - y);
+        return x - y;
             break;
     case '*':
-        return (x * y);
+        return x * y;
             break;
     case '/':
-        return (x / y);
+        return x / y;
             break;
     default:
         return 0;
@@ -119,7 +119,7 @@ for (int i = 0; i < pst.length(); i++) {
             stack2.pop();
             x = stack2.get();
             stack2.pop();
-            stack2.push(Calc(post[i], x, y));
+            stack2.push(call(pst[i], x, y));
         }
     }
     z = stack2.get();
